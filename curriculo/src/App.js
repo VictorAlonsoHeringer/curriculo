@@ -1,7 +1,9 @@
 import React from 'react';
 import { ReactTyped } from 'react-typed';
-import { FaReact, FaNodeJs, FaPhp, FaHtml5, FaCss3Alt, FaJs, FaGithub, FaDatabase } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaPhp, FaHtml5, FaCss3Alt, FaJs, FaGithub, FaDatabase, FaInstagram, FaLinkedin} from 'react-icons/fa'; // Adicionando ícones de redes sociais
 import { SiMongodb, SiPython } from 'react-icons/si';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import profileImage from './images/pfp.jfif'; 
 
 function App() {
@@ -20,11 +22,23 @@ function App() {
                   strings={["Olá, sou Victor Alonso de Andrade Heringer"]}
                   typeSpeed={50}
                   backSpeed={30}
-                  showCursor={true}
+                  showCursor={false}
                   cursorChar={"|"}
                   loop={false}
                 />
               </h1>
+              <p className="text-xl">
+                <ReactTyped
+                  strings={[
+                    "Email - victor_heringer@outlook.com &nbsp;&nbsp;&nbsp;&nbsp;Telefone - (27)99972-6799",
+                  ]}
+                  typeSpeed={40}
+                  backSpeed={20}
+                  showCursor={false}
+                  cursorChar={"|"}
+                  loop={false}
+                />
+              </p>
               <p className="text-xl">
                 <ReactTyped
                   strings={[
@@ -149,6 +163,24 @@ function App() {
             <p className="mt-2 text-white">
               A plataforma foi construída utilizando <strong>React</strong> e <strong>Tailwind CSS</strong>, priorizando a experiência do usuário com uma interface moderna e funcional. O design responsivo garante que o site funcione perfeitamente em todos os dispositivos. Contém integração com a <strong>Amazon SES</strong> para disparo de emails.
             </p>
+          </div>
+
+          <div className="mt-10 bg-gray-700 p-6 rounded-md">
+            <p className="text-lg font-bold text-green-400 text-center">// Redes Sociais:</p>
+            <div className="flex justify-center space-x-6 mt-4">
+              <a href="https://twitter.com/victorheringer" target="_blank" rel="noopener noreferrer">
+                <FontAwesomeIcon icon={faXTwitter} className="text-black text-4xl hover:text-gray-800" />
+              </a>
+              <a href="https://instagram.com/victoralonso.heringer" target="_blank" rel="noopener noreferrer">
+                <FaInstagram className="text-pink-500 text-4xl hover:text-pink-600" />
+              </a>
+              <a href="https://github.com/victoralonsoheringer" target="_blank" rel="noopener noreferrer">
+                <FaGithub className="text-white text-4xl hover:text-gray-400" />
+              </a>
+              <a href="https://linkedin.com/in/victor-alonso-de-andrade-heringer/" target="_blank" rel="noopener noreferrer">
+                <FaLinkedin className="text-blue-600 text-4xl hover:text-blue-700" />
+              </a>
+            </div>
           </div>
         </div>
       </div>
