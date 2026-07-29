@@ -1,0 +1,579 @@
+---
+import { Image } from 'astro:assets';
+
+import { CommandPalette } from '@/components/features/CommandPalette';
+import Icon from '@/components/ui/Icon.astro';
+import SectionHeading from '@/components/ui/SectionHeading.astro';
+import profileImage from '@/images/victor-heringer-portrait.png';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import type { PortfolioContent } from '@/types/portfolio';
+
+interface Props {
+  content: PortfolioContent;
+}
+
+const { content } = Astro.props;
+const isPt = content.locale === 'pt';
+const base = import.meta.env.BASE_URL;
+const sectionIds = isPt
+  ? {
+      about: 'sobre',
+      projects: 'projetos',
+      experience: 'experiencia',
+      skills: 'competencias',
+      engineering: 'engenharia',
+      education: 'formacao',
+      contact: 'contato',
+    }
+  : {
+      about: 'about',
+      projects: 'projects',
+      experience: 'experience',
+      skills: 'capabilities',
+      engineering: 'engineering',
+      education: 'education',
+      contact: 'contact',
+    };
+
+const alternateHref = isPt ? `${base}en/` : base;
+const commands = [
+  ...content.navigation.map((item) => ({
+    label: item.label,
+    hint: isPt ? 'Navegar' : 'Navigate',
+    href: item.href,
+  })),
+  {
+    label: isPt ? 'Alternar tema' : 'Toggle theme',
+    hint: isPt ? 'Aparência' : 'Appearance',
+    action: 'theme' as const,
+  },
+  {
+    label: content.alternateLanguageLabel,
+    hint: isPt ? 'Idioma' : 'Language',
+    href: alternateHref,
+  },
+  {
+    label: 'LinkedIn',
+    hint: isPt ? 'Perfil externo' : 'External profile',
+    href: 'https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/',
+  },
+  {
+    label: 'victor_heringer@outlook.com',
+    hint: isPt ? 'Enviar email' : 'Send email',
+    href: 'mailto:victor_heringer@outlook.com',
+  },
+];
+---
+
+<BaseLayout
+  locale={content.locale}
+  title={content.meta.title}
+  description={content.meta.description}
+>
+  <a class="skip-link" href="#main-content">{content.ui.skipToContent}</a>
+  <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href={isPt ? base : `${base}en/`} aria-label="Victor Heringer — Home">
+        <span class="brand-mark" aria-hidden="true">VH</span>
+        <span class="brand-copy">
+          <strong>Victor Heringer</strong>
+          <small>Backend Developer</small>
+        </span>
+      </a>
+
+      <nav
+        class="desktop-navigation"
+        aria-label={isPt ? 'Navegação principal' : 'Primary navigation'}
+      >
+        {content.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      </nav>
+
+      <div class="header-actions">
+        <CommandPalette
+          client:load
+          commands={commands}
+          label={content.ui.command}
+          placeholder={content.ui.commandPlaceholder}
+          noResults={content.ui.noResults}
+        />
+        <a class="language-switch" href={alternateHref} lang={isPt ? 'en' : 'pt-BR'}>
+          {isPt ? 'EN' : 'PT'}
+        </a>
+        <button
+          class="icon-button theme-toggle"
+          type="button"
+          data-theme-toggle
+          aria-label={content.ui.theme}
+        >
+          <span class="theme-dark-icon"><Icon name="sun" size={18} /></span>
+          <span class="theme-light-icon"><Icon name="moon" size={18} /></span>
+        </button>
+        <button
+          class="mobile-menu-button"
+          type="button"
+          aria-label={content.ui.menu}
+          aria-expanded="false"
+          aria-controls="mobile-navigation"
+          data-menu-toggle
+        >
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <nav
+      id="mobile-navigation"
+      class="mobile-navigation container"
+      aria-label={isPt ? 'Navegação móvel' : 'Mobile navigation'}
+      data-navigation
+    >
+      {content.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href={alternateHref}>{content.alternateLanguageLabel}</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section-shell" aria-labelledby="hero-title">
+      <div class="hero-ambient" aria-hidden="true">
+        <div class="hero-orb hero-orb-one"></div>
+        <div class="hero-orb hero-orb-two"></div>
+        <div class="hero-grid"></div>
+      </div>
+      <div class="hero-content container">
+        <div class="hero-copy">
+          <p class="eyebrow hero-eyebrow"><span></span>{content.hero.eyebrow}</p>
+          <h1 id="hero-title">
+            {content.hero.title}
+            <span>{content.hero.accent}</span>
+          </h1>
+          <p class="hero-description">{content.hero.description}</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href={`#${sectionIds.projects}`}>
+              {content.hero.primaryCta}<Icon name="arrow-up-right" size={18} />
+            </a>
+            <a class="button button-secondary" href={`#${sectionIds.contact}`}>
+              {content.hero.secondaryCta}
+            </a>
+          </div>
+          <div class="hero-meta">
+            <span>{content.hero.location}</span>
+            <span class="availability"><i></i>{content.hero.availability}</span>
+          </div>
+        </div>
+
+        <aside
+          class="profile-card"
+          aria-label={isPt ? 'Perfil profissional' : 'Professional profile'}
+        >
+          <div class="profile-image-wrap">
+            <Image
+              src={profileImage}
+              width={400}
+              height={400}
+              quality={82}
+              format="webp"
+              alt={isPt
+                ? 'Retrato profissional de Victor Heringer'
+                : 'Professional portrait of Victor Heringer'}
+              loading="eager"
+              fetchpriority="high"
+            />
+            <div class="profile-image-shine" aria-hidden="true"></div>
+          </div>
+          <div class="profile-card-copy">
+            <span class="profile-status"><i></i>{isPt ? 'Open to work' : 'Open to work'}</span>
+            <p>Victor Alonso Heringer</p>
+            <small>{isPt ? 'Backend · APIs · Integrações' : 'Backend · APIs · Integrations'}</small>
+          </div>
+          <div class="profile-socials">
+            <a
+              href="https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"><Icon name="linkedin" size={18} /></a
+            >
+            <a
+              href="mailto:victor_heringer@outlook.com"
+              aria-label={isPt ? 'Enviar email' : 'Send email'}
+            >
+              <Icon name="mail" size={19} />
+            </a>
+          </div>
+        </aside>
+      </div>
+      <a
+        class="scroll-cue"
+        href={`#${sectionIds.about}`}
+        aria-label={isPt ? 'Rolar para o conteúdo' : 'Scroll to content'}
+      >
+        <span></span>{isPt ? 'Explorar' : 'Explore'}
+      </a>
+    </section>
+
+    <section id={sectionIds.about} class="section-shell overview-section">
+      <div class="container">
+        <div class="overview-grid">
+          <SectionHeading
+            eyebrow={content.overview.eyebrow}
+            title={content.overview.title}
+            description={content.overview.description}
+          />
+          <div
+            class="metrics-grid reveal"
+            aria-label={isPt ? 'Resumo em números' : 'Profile in numbers'}
+          >
+            {
+              content.overview.metrics.map((metric) => (
+                <div class="metric">
+                  <strong>{metric.value}</strong>
+                  <span>{metric.label}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id={sectionIds.projects} class="section-shell projects-section">
+      <div class="container">
+        <SectionHeading
+          eyebrow={content.projects.eyebrow}
+          title={content.projects.title}
+          description={content.projects.description}
+        />
+
+        <div class="projects-list">
+          {
+            content.projects.items.map((project, index) => (
+              <article class="project-card reveal">
+                <div
+                  class:list={[
+                    'project-visual',
+                    !project.image && 'project-visual-architecture',
+                    `project-visual-${project.slug}`,
+                  ]}
+                >
+                  {project.image ? (
+                    <img
+                      src={`${base}${project.image}`}
+                      width="1440"
+                      height="900"
+                      loading="lazy"
+                      decoding="async"
+                      alt={
+                        isPt
+                          ? `Interface do projeto ${project.title}`
+                          : `${project.title} project interface`
+                      }
+                    />
+                  ) : project.slug === 'agah-arquitetura' ? (
+                    <div class="architecture-art" aria-hidden="true">
+                      <div class="architecture-mark">agah</div>
+                      <div class="architecture-lines" />
+                      <span>architecture / space / form</span>
+                    </div>
+                  ) : project.slug === 'las-monolith' ? (
+                    <div class="system-art system-art-las" aria-hidden="true">
+                      <div class="system-art-heading">
+                        <span>LAS</span>
+                        <small>analytics / scouting / preparation</small>
+                      </div>
+                      <div class="system-modules">
+                        <span>Scouting</span>
+                        <span>Draft</span>
+                        <span>Roster</span>
+                        <span>Metrics</span>
+                      </div>
+                      <div class="system-core">
+                        <span>FastAPI</span>
+                        <i />
+                        <span>PostgreSQL</span>
+                      </div>
+                    </div>
+                  ) : project.slug === 'nexus' ? (
+                    <div class="system-art system-art-nexus" aria-hidden="true">
+                      <div class="system-art-heading">
+                        <span>NEXUS</span>
+                        <small>AI / memory / planning</small>
+                      </div>
+                      <div class="system-modules">
+                        <span>Plans</span>
+                        <span>Agents</span>
+                        <span>Memory</span>
+                        <span>Kanban</span>
+                      </div>
+                      <div class="system-core">
+                        <span>Fastify</span>
+                        <i />
+                        <span>Gemini</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div class="system-art" aria-hidden="true">
+                      <div class="system-art-heading">
+                        <span>HSS</span>
+                        <small>modular / multi-tenant / platform</small>
+                      </div>
+                      <div class="system-modules">
+                        <span>CRM</span>
+                        <span>Workflow</span>
+                        <span>Forms</span>
+                        <span>Approvals</span>
+                      </div>
+                      <div class="system-core">
+                        <span>Fastify API</span>
+                        <i />
+                        <span>PostgreSQL</span>
+                      </div>
+                    </div>
+                  )}
+                  <div class="browser-chrome" aria-hidden="true">
+                    <span />
+                    <span />
+                    <span />
+                    <small>{project.url ?? project.slug}</small>
+                  </div>
+                  <span class="project-number">0{index + 1}</span>
+                </div>
+
+                <div class="project-content">
+                  <div class="project-heading">
+                    <div>
+                      <p class="eyebrow">
+                        <span />
+                        {project.eyebrow}
+                      </p>
+                      <h3>{project.title}</h3>
+                    </div>
+                    <span class="status-pill">
+                      <i />
+                      {project.status}
+                    </span>
+                  </div>
+                  <p class="project-description">{project.description}</p>
+                  <div class="project-details">
+                    <div>
+                      <small>{isPt ? 'Problema' : 'Problem'}</small>
+                      <p>{project.problem}</p>
+                    </div>
+                    <div>
+                      <small>{isPt ? 'Solução' : 'Solution'}</small>
+                      <p>{project.solution}</p>
+                    </div>
+                    <div>
+                      <small>{isPt ? 'Arquitetura' : 'Architecture'}</small>
+                      <p>{project.architecture}</p>
+                    </div>
+                    <div>
+                      <small>{isPt ? 'Resultado' : 'Outcome'}</small>
+                      <p>{project.outcome}</p>
+                    </div>
+                  </div>
+                  <div class="project-footer">
+                    <ul class="tech-list" aria-label={isPt ? 'Tecnologias' : 'Technologies'}>
+                      {project.technologies.map((technology) => (
+                        <li>{technology}</li>
+                      ))}
+                    </ul>
+                    {project.url ? (
+                      <a href={project.url} target="_blank" rel="noreferrer" class="text-link">
+                        {content.projects.viewProject}
+                        <Icon name="arrow-up-right" size={17} />
+                      </a>
+                    ) : (
+                      <span class="offline-label">
+                        {project.note ?? content.projects.offlineLabel}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id={sectionIds.experience} class="section-shell experience-section">
+      <div class="container">
+        <SectionHeading eyebrow={content.experience.eyebrow} title={content.experience.title} />
+        <div class="timeline">
+          {
+            content.experience.items.map((item, index) => (
+              <article class="timeline-item reveal">
+                <div class="timeline-index" aria-hidden="true">
+                  0{index + 1}
+                </div>
+                <div class="timeline-meta">
+                  <p>{item.period}</p>
+                  <span>{item.company}</span>
+                </div>
+                <div class="timeline-content">
+                  <h3>{item.role}</h3>
+                  <p>{item.description}</p>
+                  <ul class="impact-list">
+                    {item.highlights.map((highlight) => (
+                      <li>
+                        <Icon name="check" size={17} />
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+                  <ul class="tech-list">
+                    {item.technologies.map((technology) => (
+                      <li>{technology}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id={sectionIds.skills} class="section-shell skills-section">
+      <div class="container">
+        <SectionHeading
+          eyebrow={content.skills.eyebrow}
+          title={content.skills.title}
+          description={content.skills.description}
+        />
+        <div class="skills-grid">
+          {
+            content.skills.items.map((group, index) => (
+              <article class="skill-card reveal" style={`--delay: ${index * 50}ms`}>
+                <span class="skill-index">0{index + 1}</span>
+                <h3>{group.title}</h3>
+                <p>{group.description}</p>
+                <ul>
+                  {group.skills.map((skill) => (
+                    <li>{skill}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id={sectionIds.engineering} class="section-shell architecture-section">
+      <div class="container">
+        <div class="architecture-intro">
+          <SectionHeading
+            eyebrow={content.architecture.eyebrow}
+            title={content.architecture.title}
+            description={content.architecture.description}
+          />
+          <div class="principles">
+            {
+              content.architecture.principles.map((principle, index) => (
+                <article class="principle reveal">
+                  <span>0{index + 1}</span>
+                  <div>
+                    <h3>{principle.title}</h3>
+                    <p>{principle.description}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+        <div
+          class="architecture-diagram reveal"
+          aria-label={isPt ? 'Fluxo de arquitetura de software' : 'Software architecture flow'}
+        >
+          <div class="diagram-header">
+            <p>system.flow</p>
+            <span>{isPt ? 'Responsabilidades explícitas' : 'Explicit responsibilities'}</span>
+          </div>
+          <ol>
+            {
+              content.architecture.flow.map((step, index) => (
+                <li>
+                  <small>{String(index + 1).padStart(2, '0')}</small>
+                  <strong>{step}</strong>
+                  {index < content.architecture.flow.length - 1 && (
+                    <span aria-hidden="true">→</span>
+                  )}
+                </li>
+              ))
+            }
+          </ol>
+          <div class="diagram-pulse" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id={sectionIds.education} class="section-shell education-section">
+      <div class="container">
+        <SectionHeading eyebrow={content.education.eyebrow} title={content.education.title} />
+        <div class="education-list">
+          {
+            content.education.items.map((item) => (
+              <article class="education-item reveal">
+                <div>
+                  <span>{item.period}</span>
+                  <h3>{item.title}</h3>
+                </div>
+                <div>
+                  <strong>{item.institution}</strong>
+                  <p>{item.description}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id={sectionIds.contact} class="section-shell contact-section">
+      <div class="contact-orb" aria-hidden="true"></div>
+      <div class="container contact-inner">
+        <p class="eyebrow reveal"><span></span>{content.contact.eyebrow}</p>
+        <h2 class="reveal">{content.contact.title}</h2>
+        <p class="contact-description reveal">{content.contact.description}</p>
+        <div class="contact-actions reveal">
+          <a class="button button-primary" href="mailto:victor_heringer@outlook.com">
+            <Icon name="mail" size={19} />{content.contact.emailAction}
+          </a>
+          <button
+            class="button button-secondary"
+            type="button"
+            data-copy-email
+            data-copied={content.contact.copied}
+          >
+            <Icon name="copy" size={18} />{content.contact.copyAction}
+          </button>
+        </div>
+        <a class="contact-email reveal" href="mailto:victor_heringer@outlook.com">
+          victor_heringer@outlook.com
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="brand-mark" aria-hidden="true">VH</span>
+        <p>© {new Date().getFullYear()} Victor Heringer. {content.ui.footer}</p>
+      </div>
+      <nav aria-label={isPt ? 'Links sociais' : 'Social links'}>
+        <a
+          href="https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/"
+          target="_blank"
+          rel="noreferrer">LinkedIn</a
+        >
+        <a href="mailto:victor_heringer@outlook.com">Email</a>
+      </nav>
+    </div>
+  </footer>
+
+  <button class="back-to-top" type="button" data-back-to-top aria-label={content.ui.backToTop}>
+    <Icon name="arrow-up" size={19} />
+  </button>
+</BaseLayout>

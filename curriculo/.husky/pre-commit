@@ -1,0 +1,2 @@
+cd curriculo
+npx lint-staged

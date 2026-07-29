@@ -1,70 +1,142 @@
-# Getting Started with Create React App
+# Victor Heringer — Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Portfólio profissional bilíngue de Victor Alonso Heringer, Backend Developer em Vitória, Brasil. O projeto foi reconstruído como um produto estático, acessível e de alto desempenho.
 
-## Available Scripts
+## Stack
 
-In the project directory, you can run:
+- Astro para geração estática, metadata e composição das páginas.
+- React somente na command palette interativa.
+- TypeScript em modo estrito para contratos de conteúdo e componentes.
+- CSS nativo com design tokens e temas configuráveis.
+- Vitest e Playwright para testes.
+- ESLint, Prettier, Husky e lint-staged para qualidade contínua.
 
-### `npm start`
+## Arquitetura
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```text
+src/
+├── components/
+│   ├── features/        # Ilhas interativas, como a command palette
+│   ├── sections/        # Composição das páginas
+│   └── ui/              # Primitivos visuais reutilizáveis
+├── data/                # Conteúdo tipado em português e inglês
+├── layouts/             # Documento, SEO, schema e comportamento global
+├── pages/               # Rotas estáticas / e /en
+├── styles/              # Design system e responsividade
+├── types/               # Contratos de domínio
+└── utils/               # Funções puras e testáveis
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+O conteúdo é independente dos componentes. Novas experiências, projetos ou traduções devem ser adicionados em `src/data/portfolio.ts`, mantendo a interface livre de textos duplicados.
 
-### `npm test`
+## Decisões importantes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Astro com React islands
 
-### `npm run build`
+O conteúdo principal não precisa de hidratação. Astro entrega HTML pronto, enquanto React é carregado apenas para a command palette.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Benefícios:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- menor JavaScript inicial;
+- melhor LCP e SEO;
+- menos estados e efeitos no runtime;
+- interatividade preservada onde agrega valor.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Trade-off: componentes Astro e React convivem na base, exigindo limites explícitos entre conteúdo estático e estado interativo.
 
-### `npm run eject`
+### CSS próprio em vez de framework visual
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+O design system utiliza custom properties, `@layer` e breakpoints definidos pelo produto. Isso elimina classes repetitivas e permite que tema, contraste e motion sejam tratados como decisões sistêmicas.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Trade-off: os estilos iniciais são mais extensos, mas não adicionam runtime ou dependência de framework.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Métricas verificáveis
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Commits totais, resultados comerciais e contribuições privadas não são exibidos sem fonte confiável. O portfólio prefere uma informação menor e correta a uma estatística atraente, porém enganosa.
 
-## Learn More
+## Executando localmente
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Requisitos:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Node.js 22.12 ou superior;
+- npm 9.6 ou superior.
 
-### Code Splitting
+```bash
+npm install
+npm run dev
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+A aplicação estará em `http://localhost:4321`.
 
-### Analyzing the Bundle Size
+## Qualidade
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm run lint
+npm run check
+npm test
+npm run build
+npm run test:e2e
+```
 
-### Making a Progressive Web App
+Antes do primeiro teste E2E:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npx playwright install --with-deps chromium
+```
 
-### Advanced Configuration
+Metas:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Performance Lighthouse ≥ 95;
+- Accessibility = 100;
+- Best Practices = 100;
+- SEO ≥ 95;
+- CLS ≤ 0,05.
 
-### Deployment
+Os resultados podem variar conforme hardware, rede e ambiente de auditoria.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Conteúdo e idiomas
 
-### `npm run build` fails to minify
+- Português: `/`
+- Inglês: `/en/`
+- Alternância por link real, com páginas indexáveis e `hreflang`.
+- Preferência de tema persistida em `localStorage`.
+- `Ctrl/Cmd + K` abre a command palette.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Deploy
+
+O resultado de `npm run build` é gerado em `dist/`.
+
+### Vercel
+
+Configure `curriculo` como Root Directory. O arquivo `vercel.json` já define build e saída.
+
+### Netlify
+
+O `netlify.toml` na raiz do repositório executa o projeto a partir da pasta correta.
+
+### Cloudflare Pages
+
+- Root directory: `curriculo`
+- Build command: `npm run build`
+- Output directory: `dist`
+- Node version: `22.12`
+
+### GitHub Pages
+
+```bash
+SITE_URL=https://victoralonsoheringer.github.io \
+BASE_PATH=/curriculo \
+npm run build
+```
+
+## Segurança e privacidade
+
+- Nenhuma chave é incluída no bundle.
+- Links externos usam `rel="noreferrer"`.
+- Headers recomendados estão em `public/_headers`.
+- Telefone e WhatsApp não são publicados.
+- O projeto não inventa dados profissionais ausentes.
+
+## Licença
+
+O código pode ser estudado como referência. Textos, fotografia, identidade visual e informações pessoais permanecem de propriedade de Victor Heringer.

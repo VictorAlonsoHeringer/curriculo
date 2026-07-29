@@ -1,0 +1,90 @@
+---
+interface Props {
+  name:
+    | 'arrow-up-right'
+    | 'check'
+    | 'copy'
+    | 'linkedin'
+    | 'mail'
+    | 'moon'
+    | 'search'
+    | 'sun'
+    | 'arrow-up';
+  size?: number;
+}
+
+const { name, size = 20 } = Astro.props;
+---
+
+<svg
+  aria-hidden="true"
+  class="icon"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  {
+    name === 'arrow-up-right' && (
+      <>
+        <path d="M7 17 17 7" />
+        <path d="M7 7h10v10" />
+      </>
+    )
+  }
+  {name === 'check' && <path d="m5 12 4 4L19 6" />}
+  {
+    name === 'copy' && (
+      <>
+        <rect x="9" y="9" width="11" height="11" rx="2" />
+        <path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3" />
+      </>
+    )
+  }
+  {
+    name === 'linkedin' && (
+      <>
+        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z" />
+        <path d="M2 9h4v12H2z" />
+        <path d="M4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z" />
+      </>
+    )
+  }
+  {
+    name === 'mail' && (
+      <>
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m3 7 9 6 9-6" />
+      </>
+    )
+  }
+  {name === 'moon' && <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" />}
+  {
+    name === 'search' && (
+      <>
+        <circle cx="11" cy="11" r="7" />
+        <path d="m20 20-4-4" />
+      </>
+    )
+  }
+  {
+    name === 'sun' && (
+      <>
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41" />
+      </>
+    )
+  }
+  {
+    name === 'arrow-up' && (
+      <>
+        <path d="m18 15-6-6-6 6" />
+        <path d="M12 9v11" />
+      </>
+    )
+  }
+</svg>
