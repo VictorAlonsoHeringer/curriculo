@@ -33,6 +33,10 @@ test('supports theme and command palette interactions', async ({ page }) => {
   await page.getByRole('button', { name: 'Alternar tema' }).click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', /light|dark/);
 
+  await expect(page.locator('astro-island[component-export="CommandPalette"]')).not.toHaveAttribute(
+    'ssr',
+    '',
+  );
   await page.keyboard.press('Control+k');
   await expect(page.getByRole('dialog', { name: 'Abrir busca e comandos' })).toBeVisible();
   await page.getByPlaceholder('Navegue pelo portfólio…').fill('Projetos');
