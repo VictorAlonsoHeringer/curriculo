@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="g" cx="78%" cy="18%" r="75%">
+      <stop offset="0" stop-color="#314f9b" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#080b12" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="56" height="56" patternUnits="userSpaceOnUse">
+      <path d="M56 0H0V56" fill="none" stroke="#fff" stroke-opacity=".055"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#080b12"/>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect x="76" y="70" width="54" height="54" rx="14" fill="#111622" stroke="#fff" stroke-opacity=".16"/>
+  <text x="91" y="104" fill="#f2f5f9" font-family="monospace" font-size="15" font-weight="700">VH</text>
+  <text x="76" y="258" fill="#a9b1c0" font-family="monospace" font-size="17" letter-spacing="3">BACKEND DEVELOPER · VITÓRIA, BRASIL</text>
+  <text x="76" y="339" fill="#f2f5f9" font-family="Arial, sans-serif" font-size="64" font-weight="600" letter-spacing="-3">Victor Alonso Heringer</text>
+  <text x="76" y="407" fill="#b1c8ff" font-family="Arial, sans-serif" font-size="38" letter-spacing="-1">APIs · Integrações · Arquitetura · Produtos</text>
+  <line x1="76" y1="516" x2="1124" y2="516" stroke="#fff" stroke-opacity=".11"/>
+  <circle cx="87" cy="557" r="5" fill="#69d7a0"/>
+  <text x="104" y="563" fill="#737d8f" font-family="monospace" font-size="15">OPEN TO REMOTE &amp; INTERNATIONAL OPPORTUNITIES</text>
+</svg>
