@@ -26,7 +26,7 @@ const jsonLd = {
     addressRegion: 'ES',
     addressCountry: 'BR',
   },
-  email: 'mailto:victor_heringer@outlook.com',
+  email: 'mailto:victor.heringer@webhorizon.com.br',
   url: canonical.origin,
   sameAs: ['https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/'],
   knowsLanguage: [
@@ -132,7 +132,7 @@ const jsonLd = {
 
       document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
         button.addEventListener('click', async () => {
-          await navigator.clipboard.writeText('victor_heringer@outlook.com');
+          await navigator.clipboard.writeText('victor.heringer@webhorizon.com.br');
           const original = button.textContent;
           button.textContent = button.dataset.copied || 'Copied';
           button.dataset.state = 'copied';

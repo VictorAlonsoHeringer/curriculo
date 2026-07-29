@@ -14,6 +14,9 @@ test('presents the core portfolio content', async ({ page }) => {
     page.getByRole('heading', { name: 'MBA em Data Science e Analytics' }),
   ).toBeVisible();
   await expect(page.getByAltText('Retrato profissional de Victor Heringer')).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'victor.heringer@webhorizon.com.br' }),
+  ).toHaveAttribute('href', 'mailto:victor.heringer@webhorizon.com.br');
 });
 
 test('has no horizontal overflow', async ({ page }) => {
