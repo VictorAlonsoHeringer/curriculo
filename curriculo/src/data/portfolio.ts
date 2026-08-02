@@ -1,4 +1,5 @@
 import type { PortfolioContent } from '@/types/portfolio';
+import { profile } from './profile';
 
 const sharedProjects = {
   webHorizon: {
@@ -49,9 +50,8 @@ export const pt: PortfolioContent = {
   languageLabel: 'Português',
   alternateLanguageLabel: 'English',
   meta: {
-    title: 'Victor Heringer — Backend Developer',
-    description:
-      'Backend Developer em Vitória, Brasil. APIs, integrações, arquitetura e produtos digitais com Node.js, PHP, bancos de dados e cloud.',
+    title: `${profile.displayName} — ${profile.role}`,
+    description: `${profile.role} em ${profile.location.city}, Brasil. APIs, integrações, arquitetura e produtos digitais com Node.js, PHP, bancos de dados e cloud.`,
   },
   navigation: [
     { label: 'Visão geral', href: '#sobre' },
@@ -61,7 +61,7 @@ export const pt: PortfolioContent = {
     { label: 'Contato', href: '#contato' },
   ],
   hero: {
-    eyebrow: 'Backend Developer · Vitória, Brasil',
+    eyebrow: `${profile.role} · ${profile.location.city}, Brasil`,
     title: 'Construo sistemas que',
     accent: 'continuam simples ao crescer.',
     description:
@@ -262,12 +262,14 @@ export const pt: PortfolioContent = {
         period: 'MBA',
         description:
           'Pós-graduação voltada à aplicação de dados, analytics e tomada de decisão em contextos de negócio.',
+        category: 'degree',
       },
       {
         title: 'Bacharelado em Sistemas de Informação',
         institution: 'Universidade Vila Velha — UVV',
         period: '2021 — 2025',
         description: 'Formação em engenharia de software, sistemas, dados e gestão de tecnologia.',
+        category: 'degree',
       },
       {
         title: 'Data Science',
@@ -275,12 +277,14 @@ export const pt: PortfolioContent = {
         period: 'Janeiro de 2023',
         description:
           'Programa intensivo com Python, análise de dados, Power BI, Pandas e fundamentos de machine learning.',
+        category: 'course',
       },
       {
         title: 'Inglês B2',
         institution: 'UFES · Núcleo de Línguas',
         period: 'Concluído',
         description: 'Proficiência para comunicação e colaboração em ambientes internacionais.',
+        category: 'language',
       },
     ],
   },
@@ -312,9 +316,8 @@ export const en: PortfolioContent = {
   languageLabel: 'English',
   alternateLanguageLabel: 'Português',
   meta: {
-    title: 'Victor Heringer — Backend Developer',
-    description:
-      'Backend Developer based in Vitória, Brazil. APIs, integrations, architecture and digital products with Node.js, PHP, databases and cloud.',
+    title: `${profile.displayName} — ${profile.role}`,
+    description: `${profile.role} based in ${profile.location.city}, Brazil. APIs, integrations, architecture and digital products with Node.js, PHP, databases and cloud.`,
   },
   navigation: [
     { label: 'Overview', href: '#about' },
@@ -324,7 +327,7 @@ export const en: PortfolioContent = {
     { label: 'Contact', href: '#contact' },
   ],
   hero: {
-    eyebrow: 'Backend Developer · Vitória, Brazil',
+    eyebrow: `${profile.role} · ${profile.location.city}, Brazil`,
     title: 'I build systems that',
     accent: 'stay simple as they grow.',
     description:
@@ -537,6 +540,7 @@ export const en: PortfolioContent = {
         period: 'MBA',
         description:
           'Graduate program focused on applying data, analytics, and decision-making in business contexts.',
+        category: 'degree',
       },
       {
         title: 'BSc in Information Systems',
@@ -544,6 +548,7 @@ export const en: PortfolioContent = {
         period: '2021 — 2025',
         description:
           'Education across software engineering, systems, data, and technology management.',
+        category: 'degree',
       },
       {
         title: 'Data Science',
@@ -551,6 +556,7 @@ export const en: PortfolioContent = {
         period: 'January 2023',
         description:
           'Intensive program covering Python, data analysis, Power BI, Pandas, and machine-learning fundamentals.',
+        category: 'course',
       },
       {
         title: 'English B2',
@@ -558,6 +564,7 @@ export const en: PortfolioContent = {
         period: 'Completed',
         description:
           'Working proficiency for communication and collaboration in global environments.',
+        category: 'language',
       },
     ],
   },

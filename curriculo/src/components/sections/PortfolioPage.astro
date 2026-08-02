@@ -2,8 +2,11 @@
 import { Image } from 'astro:assets';
 
 import { CommandPalette } from '@/components/features/CommandPalette';
+import { ExportResumeButton } from '@/components/features/ExportResumeButton';
 import Icon from '@/components/ui/Icon.astro';
 import SectionHeading from '@/components/ui/SectionHeading.astro';
+import { profile } from '@/data/profile';
+import { buildResumeData } from '@/data/resume';
 import profileImage from '@/images/victor-heringer-portrait.png';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import type { PortfolioContent } from '@/types/portfolio';
@@ -15,6 +18,8 @@ interface Props {
 const { content } = Astro.props;
 const isPt = content.locale === 'pt';
 const base = import.meta.env.BASE_URL;
+const resume = buildResumeData(content);
+const resumeHref = `${base}${isPt ? 'resume/' : 'en/resume/'}?print=1`;
 const sectionIds = isPt
   ? {
       about: 'sobre',
@@ -55,12 +60,12 @@ const commands = [
   {
     label: 'LinkedIn',
     hint: isPt ? 'Perfil externo' : 'External profile',
-    href: 'https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/',
+    href: profile.links.linkedin,
   },
   {
-    label: 'victor.heringer@webhorizon.com.br',
+    label: profile.email,
     hint: isPt ? 'Enviar email' : 'Send email',
-    href: 'mailto:victor.heringer@webhorizon.com.br',
+    href: `mailto:${profile.email}`,
   },
 ];
 ---
@@ -75,11 +80,15 @@ const commands = [
 
   <header class="site-header">
     <div class="header-inner container">
-      <a class="brand" href={isPt ? base : `${base}en/`} aria-label="Victor Heringer — Home">
+      <a
+        class="brand"
+        href={isPt ? base : `${base}en/`}
+        aria-label={`${profile.displayName} — Home`}
+      >
         <span class="brand-mark" aria-hidden="true">VH</span>
         <span class="brand-copy">
-          <strong>Victor Heringer</strong>
-          <small>Backend Developer</small>
+          <strong>{profile.displayName}</strong>
+          <small>{profile.role}</small>
         </span>
       </a>
 
@@ -155,6 +164,14 @@ const commands = [
             <a class="button button-secondary" href={`#${sectionIds.contact}`}>
               {content.hero.secondaryCta}
             </a>
+            <ExportResumeButton
+              client:load
+              href={resumeHref}
+              label={resume.export.label}
+              ariaLabel={resume.export.ariaLabel}
+              preparingLabel={resume.export.preparing}
+              errorLabel={resume.export.error}
+            />
           </div>
           <div class="hero-meta">
             <span>{content.hero.location}</span>
@@ -174,8 +191,8 @@ const commands = [
               quality={82}
               format="webp"
               alt={isPt
-                ? 'Retrato profissional de Victor Heringer'
-                : 'Professional portrait of Victor Heringer'}
+                ? `Retrato profissional de ${profile.displayName}`
+                : `Professional portrait of ${profile.displayName}`}
               loading="eager"
               fetchpriority="high"
             />
@@ -183,20 +200,14 @@ const commands = [
           </div>
           <div class="profile-card-copy">
             <span class="profile-status"><i></i>{isPt ? 'Open to work' : 'Open to work'}</span>
-            <p>Victor Alonso Heringer</p>
+            <p>{profile.fullName}</p>
             <small>{isPt ? 'Backend · APIs · Integrações' : 'Backend · APIs · Integrations'}</small>
           </div>
           <div class="profile-socials">
-            <a
-              href="https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/"
-              target="_blank"
-              rel="noreferrer"
-              aria-label="LinkedIn"><Icon name="linkedin" size={18} /></a
+            <a href={profile.links.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"
+              ><Icon name="linkedin" size={18} /></a
             >
-            <a
-              href="mailto:victor.heringer@webhorizon.com.br"
-              aria-label={isPt ? 'Enviar email' : 'Send email'}
-            >
+            <a href={`mailto:${profile.email}`} aria-label={isPt ? 'Enviar email' : 'Send email'}>
               <Icon name="mail" size={19} />
             </a>
           </div>
@@ -537,20 +548,29 @@ const commands = [
         <h2 class="reveal">{content.contact.title}</h2>
         <p class="contact-description reveal">{content.contact.description}</p>
         <div class="contact-actions reveal">
-          <a class="button button-primary" href="mailto:victor.heringer@webhorizon.com.br">
+          <a class="button button-primary" href={`mailto:${profile.email}`}>
             <Icon name="mail" size={19} />{content.contact.emailAction}
           </a>
           <button
             class="button button-secondary"
             type="button"
             data-copy-email
+            data-email={profile.email}
             data-copied={content.contact.copied}
           >
             <Icon name="copy" size={18} />{content.contact.copyAction}
           </button>
+          <ExportResumeButton
+            client:visible
+            href={resumeHref}
+            label={resume.export.label}
+            ariaLabel={resume.export.ariaLabel}
+            preparingLabel={resume.export.preparing}
+            errorLabel={resume.export.error}
+          />
         </div>
-        <a class="contact-email reveal" href="mailto:victor.heringer@webhorizon.com.br">
-          victor.heringer@webhorizon.com.br
+        <a class="contact-email reveal" href={`mailto:${profile.email}`}>
+          {profile.email}
         </a>
       </div>
     </section>
@@ -560,15 +580,11 @@ const commands = [
     <div class="container footer-inner">
       <div>
         <span class="brand-mark" aria-hidden="true">VH</span>
-        <p>© {new Date().getFullYear()} Victor Heringer. {content.ui.footer}</p>
+        <p>© {new Date().getFullYear()} {profile.displayName}. {content.ui.footer}</p>
       </div>
       <nav aria-label={isPt ? 'Links sociais' : 'Social links'}>
-        <a
-          href="https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/"
-          target="_blank"
-          rel="noreferrer">LinkedIn</a
-        >
-        <a href="mailto:victor.heringer@webhorizon.com.br">Email</a>
+        <a href={profile.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href={`mailto:${profile.email}`}>Email</a>
       </nav>
     </div>
   </footer>

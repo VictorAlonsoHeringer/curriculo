@@ -1,6 +1,7 @@
 ---
 import '@/styles/global.css';
 
+import { profile } from '@/data/profile';
 import type { Locale } from '@/types/portfolio';
 
 interface Props {
@@ -18,17 +19,17 @@ const socialImage = new URL(`${base}social-card.svg`, Astro.site);
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Victor Alonso Heringer',
-  jobTitle: 'Backend Developer',
+  name: profile.fullName,
+  jobTitle: profile.role,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Vitória',
-    addressRegion: 'ES',
-    addressCountry: 'BR',
+    addressLocality: profile.location.city,
+    addressRegion: profile.location.region,
+    addressCountry: profile.location.countryCode,
   },
-  email: 'mailto:victor.heringer@webhorizon.com.br',
-  url: canonical.origin,
-  sameAs: ['https://www.linkedin.com/in/victor-alonso-de-andrade-heringer/'],
+  email: `mailto:${profile.email}`,
+  url: profile.links.portfolio,
+  sameAs: [profile.links.linkedin],
   knowsLanguage: [
     { '@type': 'Language', name: 'Portuguese' },
     { '@type': 'Language', name: 'English', alternateName: 'B2' },
@@ -51,7 +52,7 @@ const jsonLd = {
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="manifest" href={`${base}manifest.webmanifest`} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Victor Heringer" />
+    <meta property="og:site_name" content={profile.displayName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -132,7 +133,9 @@ const jsonLd = {
 
       document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
         button.addEventListener('click', async () => {
-          await navigator.clipboard.writeText('victor.heringer@webhorizon.com.br');
+          const email = button.dataset.email;
+          if (!email) return;
+          await navigator.clipboard.writeText(email);
           const original = button.textContent;
           button.textContent = button.dataset.copied || 'Copied';
           button.dataset.state = 'copied';

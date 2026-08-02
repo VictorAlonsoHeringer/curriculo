@@ -1,0 +1,235 @@
+---
+import ResumeLayout from '@/layouts/ResumeLayout.astro';
+import type { ResumeData } from '@/types/resume';
+
+interface Props {
+  resume: ResumeData;
+}
+
+const { resume } = Astro.props;
+const isPt = resume.locale === 'pt';
+const base = import.meta.env.BASE_URL;
+const portfolioHref = isPt ? base : `${base}en/`;
+const alternateHref = isPt ? `${base}en/resume/` : `${base}resume/`;
+const readableLinkedIn = resume.personal.linkedin
+  .replace(/^https?:\/\/(www\.)?/, '')
+  .replace(/\/$/, '');
+const readablePortfolio = resume.personal.portfolio.replace(/^https?:\/\//, '').replace(/\/$/, '');
+---
+
+<ResumeLayout
+  locale={resume.locale}
+  fileName={resume.fileName}
+  description={`${isPt ? 'Currículo profissional de' : 'Professional résumé of'} ${resume.personal.fullName}, ${resume.personal.role}.`}
+>
+  <header
+    class="resume-toolbar no-print"
+    aria-label={isPt ? 'Ações do currículo' : 'Résumé actions'}
+  >
+    <div class="resume-toolbar-inner">
+      <a class="resume-back-link" href={portfolioHref}>← {resume.labels.backToPortfolio}</a>
+      <div class="resume-toolbar-actions">
+        <span>{resume.labels.documentHint}</span>
+        <a class="resume-language-link" href={alternateHref} lang={isPt ? 'en' : 'pt-BR'}>
+          {isPt ? 'EN' : 'PT'}
+        </a>
+        <button
+          class="resume-print-button"
+          type="button"
+          data-print-resume
+          data-label={resume.labels.printDocument}
+          data-preparing={resume.labels.preparing}
+          data-error={resume.labels.printError}
+          aria-label={resume.labels.printDocument}
+        >
+          <svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M7 9V3h10v6M7 18H5a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+            ></path>
+            <path d="M7 14h10v7H7z"></path>
+          </svg>
+          <span>{resume.labels.printDocument}</span>
+        </button>
+      </div>
+    </div>
+    <p class="resume-print-status" data-print-status role="status" aria-live="polite"></p>
+  </header>
+
+  <main class="resume-document" aria-labelledby="resume-name">
+    <header class="resume-header">
+      <div>
+        <h1 id="resume-name">{resume.personal.fullName}</h1>
+        <p class="resume-role">{resume.personal.role}</p>
+      </div>
+      <address class="resume-contact">
+        <span>{resume.personal.location}</span>
+        <a href={`mailto:${resume.personal.email}`}>{resume.personal.email}</a>
+        <a href={resume.personal.linkedin}>{readableLinkedIn}</a>
+        <a href={resume.personal.portfolio}>{readablePortfolio}</a>
+      </address>
+    </header>
+
+    <section class="resume-section" aria-labelledby="resume-summary">
+      <h2 id="resume-summary">{resume.labels.summary}</h2>
+      <p>{resume.summary}</p>
+    </section>
+
+    <section class="resume-section" aria-labelledby="resume-skills">
+      <h2 id="resume-skills">{resume.labels.skills}</h2>
+      <dl class="resume-skills">
+        {
+          resume.skills.map((group) => (
+            <div>
+              <dt>{group.title}</dt>
+              <dd>{group.skills.join(', ')}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="resume-section" aria-labelledby="resume-experience">
+      <h2 id="resume-experience">{resume.labels.experience}</h2>
+      <div class="resume-entries">
+        {
+          resume.experience.map((experience) => (
+            <article class="resume-entry">
+              <header>
+                <div>
+                  <h3>{experience.role}</h3>
+                  <p>{experience.company}</p>
+                </div>
+                <span>{experience.period}</span>
+              </header>
+              <p>{experience.description}</p>
+              <ul>
+                {experience.highlights.map((highlight) => (
+                  <li>{highlight}</li>
+                ))}
+              </ul>
+              <p class="resume-technologies">
+                <strong>{resume.labels.technologies}:</strong> {experience.technologies.join(', ')}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="resume-section" aria-labelledby="resume-projects">
+      <h2 id="resume-projects">{resume.labels.projects}</h2>
+      <div class="resume-entries">
+        {
+          resume.projects.map((project) => (
+            <article class="resume-entry resume-project">
+              <header>
+                <div>
+                  <h3>{project.title}</h3>
+                  <p>{project.eyebrow}</p>
+                </div>
+                {project.url && <a href={project.url}>{isPt ? 'Projeto' : 'Project'} ↗</a>}
+              </header>
+              <p>{project.description}</p>
+              <p>
+                <strong>{resume.labels.problem}:</strong> {project.problem}
+              </p>
+              <p>
+                <strong>{resume.labels.solution}:</strong> {project.solution}
+              </p>
+              <p class="resume-technologies">
+                <strong>{resume.labels.technologies}:</strong> {project.technologies.join(', ')}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="resume-section" aria-labelledby="resume-education">
+      <h2 id="resume-education">{resume.labels.education}</h2>
+      <div class="resume-entries resume-compact-entries">
+        {
+          resume.education.map((item) => (
+            <article class="resume-entry">
+              <header>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.institution}</p>
+                </div>
+                <span>{item.period}</span>
+              </header>
+              <p>{item.description}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      resume.courses.length > 0 && (
+        <section class="resume-section" aria-labelledby="resume-courses">
+          <h2 id="resume-courses">{resume.labels.courses}</h2>
+          <div class="resume-entries resume-compact-entries">
+            {resume.courses.map((item) => (
+              <article class="resume-entry">
+                <header>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.institution}</p>
+                  </div>
+                  <span>{item.period}</span>
+                </header>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )
+    }
+
+    <section class="resume-section resume-languages-section" aria-labelledby="resume-languages">
+      <h2 id="resume-languages">{resume.labels.languages}</h2>
+      <ul class="resume-languages">
+        {
+          resume.languages.map((item) => (
+            <li>
+              <strong>{item.title}</strong> — {item.description}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    const printButton = document.querySelector<HTMLButtonElement>('[data-print-resume]');
+    const printStatus = document.querySelector<HTMLElement>('[data-print-status]');
+
+    const printResume = async () => {
+      if (!printButton || printButton.disabled) return;
+
+      printButton.disabled = true;
+      printButton.setAttribute('aria-busy', 'true');
+      const label = printButton.querySelector('span');
+      if (label) label.textContent = printButton.dataset.preparing || 'Preparing…';
+      if (printStatus) printStatus.textContent = '';
+
+      try {
+        await document.fonts.ready;
+        window.print();
+      } catch {
+        if (printStatus) printStatus.textContent = printButton.dataset.error || 'Print failed.';
+      } finally {
+        printButton.disabled = false;
+        printButton.removeAttribute('aria-busy');
+        if (label) label.textContent = printButton.dataset.label || 'Print';
+      }
+    };
+
+    printButton?.addEventListener('click', printResume);
+
+    if (new URLSearchParams(window.location.search).get('print') === '1') {
+      window.addEventListener('load', () => window.setTimeout(printResume, 250), { once: true });
+    }
+  </script>
+</ResumeLayout>

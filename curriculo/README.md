@@ -17,17 +17,24 @@ Portfólio profissional bilíngue de Victor Alonso Heringer, Backend Developer e
 src/
 ├── components/
 │   ├── features/        # Ilhas interativas, como a command palette
+│   ├── resume/          # Documento semântico e imprimível do currículo
 │   ├── sections/        # Composição das páginas
 │   └── ui/              # Primitivos visuais reutilizáveis
 ├── data/                # Conteúdo tipado em português e inglês
 ├── layouts/             # Documento, SEO, schema e comportamento global
-├── pages/               # Rotas estáticas / e /en
+├── pages/               # Portfólio e currículo em português e inglês
 ├── styles/              # Design system e responsividade
 ├── types/               # Contratos de domínio
 └── utils/               # Funções puras e testáveis
 ```
 
-O conteúdo é independente dos componentes. Novas experiências, projetos ou traduções devem ser adicionados em `src/data/portfolio.ts`, mantendo a interface livre de textos duplicados.
+O conteúdo é independente dos componentes:
+
+- `src/data/profile.ts`: nome, cargo, localização, email e links compartilhados;
+- `src/data/portfolio.ts`: experiências, projetos, competências e formação em português e inglês;
+- `src/data/resume.ts`: adaptação, seleção e rótulos específicos do currículo.
+
+Para atualizar informações profissionais, altere essas fontes tipadas. A página e o currículo consomem os mesmos dados; não adicione informações diretamente aos componentes.
 
 ## Decisões importantes
 
@@ -43,6 +50,19 @@ Benefícios:
 - interatividade preservada onde agrega valor.
 
 Trade-off: componentes Astro e React convivem na base, exigindo limites explícitos entre conteúdo estático e estado interativo.
+
+### Currículo em HTML e CSS de impressão
+
+As rotas `/resume/` e `/en/resume/` geram um documento próprio em formato A4. O botão de exportação abre a rota do idioma atual com a impressão automática; no navegador, escolha **Salvar como PDF**. O título do documento define os nomes sugeridos:
+
+```text
+Victor-Alonso-Heringer-Curriculo-PT.pdf
+Victor-Alonso-Heringer-Resume-EN.pdf
+```
+
+A implementação usa HTML semântico, `@page`, `@media print` e `window.print()`. Isso mantém texto selecionável, links clicáveis, ordem de leitura linear e compatibilidade com ATS. Menus, botões e feedbacks usam a classe `no-print` e não aparecem no PDF.
+
+Nenhuma dependência de PDF foi adicionada. O trade-off é que o usuário confirma **Salvar como PDF** na interface nativa do navegador e pequenas diferenças de renderização podem existir entre mecanismos de impressão. Chromium é a referência validada.
 
 ### CSS próprio em vez de framework visual
 
@@ -98,9 +118,22 @@ Os resultados podem variar conforme hardware, rede e ambiente de auditoria.
 
 - Português: `/`
 - Inglês: `/en/`
+- Currículo em português: `/resume/`
+- Résumé em inglês: `/en/resume/`
 - Alternância por link real, com páginas indexáveis e `hreflang`.
 - Preferência de tema persistida em `localStorage`.
 - `Ctrl/Cmd + K` abre a command palette.
+
+## Testando a exportação do currículo
+
+1. Execute `npm run dev`.
+2. Acesse `/` ou `/en/`.
+3. Selecione **Exportar currículo** ou **Download résumé**.
+4. Confira a prévia e escolha **Salvar como PDF**.
+
+Os testes unitários validam montagem dos dados, idioma, nome do arquivo, campos opcionais, períodos, ordenação e seleção de projetos. O Playwright valida os botões, estados, erro de popup, teclado, rotas bilíngues, responsividade, mídia de impressão e geração de um PDF A4 real.
+
+A validação de extração foi feita sobre o PDF gerado pelo Chromium: duas páginas, texto pesquisável em ordem lógica, conteúdo equilibrado e links preservados.
 
 ## Deploy
 

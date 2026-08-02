@@ -1,0 +1,9 @@
+---
+import ResumePage from '@/components/resume/ResumePage.astro';
+import { pt } from '@/data/portfolio';
+import { buildResumeData } from '@/data/resume';
+
+const resume = buildResumeData(pt);
+---
+
+<ResumePage {resume} />

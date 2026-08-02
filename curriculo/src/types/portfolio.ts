@@ -36,6 +36,16 @@ export interface SkillGroup {
   skills: string[];
 }
 
+export type EducationCategory = 'degree' | 'course' | 'language';
+
+export interface EducationItem {
+  title: string;
+  institution: string;
+  period: string;
+  description: string;
+  category: EducationCategory;
+}
+
 export interface PortfolioContent {
   locale: Locale;
   languageLabel: string;
@@ -90,7 +100,7 @@ export interface PortfolioContent {
   education: {
     eyebrow: string;
     title: string;
-    items: Array<{ title: string; institution: string; period: string; description: string }>;
+    items: EducationItem[];
   };
   contact: {
     eyebrow: string;

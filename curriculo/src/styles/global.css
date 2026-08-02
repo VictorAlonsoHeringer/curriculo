@@ -597,6 +597,17 @@
     transform: translateY(-2px);
   }
 
+  .button:focus-visible {
+    outline: 3px solid color-mix(in srgb, var(--accent) 65%, transparent);
+    outline-offset: 3px;
+  }
+
+  .button:disabled {
+    cursor: wait;
+    opacity: 0.66;
+    transform: none;
+  }
+
   .button-primary {
     background: var(--text);
     color: var(--page);
@@ -616,6 +627,33 @@
   .button-secondary:hover {
     border-color: var(--line-strong);
     background: var(--surface-hover);
+  }
+
+  .export-resume-control {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .export-resume-button[aria-busy='true'] svg {
+    animation: export-pulse 900ms ease-in-out infinite alternate;
+  }
+
+  .export-resume-feedback {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: max-content;
+    max-width: min(320px, 80vw);
+    color: #e58b8b;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  @keyframes export-pulse {
+    to {
+      transform: translateY(2px);
+      opacity: 0.45;
+    }
   }
 
   .hero-meta {
@@ -1934,6 +1972,11 @@
 
   .hero-actions .button,
   .contact-actions .button {
+    width: 100%;
+  }
+
+  .hero-actions .export-resume-control,
+  .contact-actions .export-resume-control {
     width: 100%;
   }
 

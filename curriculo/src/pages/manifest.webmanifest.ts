@@ -1,12 +1,13 @@
 import type { APIRoute } from 'astro';
+import { profile } from '@/data/profile';
 
 export const GET: APIRoute = () => {
   const base = import.meta.env.BASE_URL;
   return new Response(
     JSON.stringify({
-      name: 'Victor Heringer — Backend Developer',
-      short_name: 'Victor Heringer',
-      description: 'Backend Developer focado em APIs, integrações e produtos digitais.',
+      name: `${profile.displayName} — ${profile.role}`,
+      short_name: profile.displayName,
+      description: `${profile.role} focado em APIs, integrações e produtos digitais.`,
       start_url: base,
       scope: base,
       display: 'standalone',
