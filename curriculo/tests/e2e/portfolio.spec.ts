@@ -104,13 +104,16 @@ test('renders an ATS-oriented bilingual resume route', async ({ page }) => {
     page.getByRole('heading', { level: 1, name: 'Victor Alonso Heringer' }),
   ).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Experiência profissional' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Projetos em destaque' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: 'Projetos de engenharia selecionados' }),
+  ).toBeVisible();
   await expect(page.getByText('victor.heringer@webhorizon.com.br')).toBeVisible();
   const languageLink = page.getByRole('link', { name: 'EN' });
   await expect(languageLink).toHaveAttribute('href', /\/en\/resume\/$/);
   await languageLink.click();
   await expect(page).toHaveURL(/\/en\/resume\/$/);
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Selected engineering projects' })).toBeVisible();
 
   const dimensions = await page.evaluate(() => ({
     viewport: document.documentElement.clientWidth,
