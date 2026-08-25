@@ -43,12 +43,28 @@ describe('resume data', () => {
     );
   });
 
-  it('selects only the three backend and AI focused projects', () => {
+  it('prioritizes the data platform before the backend and AI projects', () => {
     expect(selectFeaturedProjects(pt).map(({ slug }) => slug)).toEqual([
-      'hss-monolith',
       'las-monolith',
+      'hss-monolith',
       'nexus',
     ]);
+  });
+
+  it('positions the printable resume around backend and data engineering', () => {
+    const resume = buildResumeData(en);
+
+    expect(resume.personal.role).toBe('Backend Software Engineer | Data & Cloud');
+    expect(resume.skills.map(({ title }) => title)).toEqual([
+      'Backend Engineering',
+      'Databases & Data',
+      'Data Engineering & Analytics',
+      'Cloud & Infrastructure',
+      'Architecture & Engineering',
+      'AI & Automation',
+      'Complementary Frontend',
+    ]);
+    expect(resume.projects[0]?.technologies).toContain('Polars');
   });
 
   it('separates degrees, coursework, and languages by typed category', () => {
