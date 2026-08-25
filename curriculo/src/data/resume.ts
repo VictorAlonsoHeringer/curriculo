@@ -147,7 +147,7 @@ const experienceByLocale: Record<PortfolioContent['locale'], Experience[]> = {
     },
     {
       company: 'Ilumimais Gestão Inteligente',
-      role: 'Desenvolvimento de software backend',
+      role: 'Desenvolvedor de Software Full Stack',
       period: 'Desde abril de 2023',
       description:
         'Desenvolvimento e manutenção de um sistema de gestão em produção, com foco em regras de negócio, backend e persistência de dados.',
@@ -175,7 +175,7 @@ const experienceByLocale: Record<PortfolioContent['locale'], Experience[]> = {
     },
     {
       company: 'Ilumimais Gestão Inteligente',
-      role: 'Backend software development',
+      role: 'Full Stack Software Developer',
       period: 'Apr 2023 — Present',
       description:
         'Developing and maintaining a production management system focused on business rules, backend services, and data persistence.',

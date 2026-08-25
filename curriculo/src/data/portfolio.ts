@@ -199,7 +199,7 @@ export const pt: PortfolioContent = {
       {
         title: 'Backend',
         description: 'Serviços e regras de negócio previsíveis.',
-        skills: ['Node.js', 'Fastify', 'PHP', 'REST APIs', 'Integrações'],
+        skills: ['Node.js', 'Fastify', 'Python', 'PHP', 'REST APIs', 'Integrações'],
       },
       {
         title: 'Frontend',
@@ -477,7 +477,7 @@ export const en: PortfolioContent = {
       {
         title: 'Backend',
         description: 'Predictable services and business rules.',
-        skills: ['Node.js', 'Fastify', 'PHP', 'REST APIs', 'Integrations'],
+        skills: ['Node.js', 'Fastify', 'Python', 'PHP', 'REST APIs', 'Integrations'],
       },
       {
         title: 'Frontend',

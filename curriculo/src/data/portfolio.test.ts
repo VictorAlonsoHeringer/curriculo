@@ -26,4 +26,9 @@ describe('portfolio content', () => {
       ]),
     );
   });
+
+  it('lists Python as part of the localized backend stack', () => {
+    expect(pt.skills.items.find(({ title }) => title === 'Backend')?.skills).toContain('Python');
+    expect(en.skills.items.find(({ title }) => title === 'Backend')?.skills).toContain('Python');
+  });
 });

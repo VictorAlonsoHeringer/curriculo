@@ -64,6 +64,7 @@ describe('resume data', () => {
       'AI & Automation',
       'Complementary Frontend',
     ]);
+    expect(resume.experience[1]?.role).toBe('Full Stack Software Developer');
     expect(resume.projects[0]?.technologies).toContain('Polars');
   });
 
