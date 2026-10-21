@@ -2,7 +2,7 @@ import type { Experience, PortfolioContent, Project, SkillGroup } from '../types
 import type { ResumeData, ResumeLabels } from '../types/resume';
 import { profile } from './profile';
 
-const featuredProjectSlugs = ['las-monolith', 'hss-monolith', 'nexus'];
+const featuredProjectSlugs = ['chronos', 'las-monolith', 'nexus'];
 
 const labelsByLocale: Record<PortfolioContent['locale'], ResumeLabels> = {
   pt: {
@@ -44,8 +44,8 @@ const labelsByLocale: Record<PortfolioContent['locale'], ResumeLabels> = {
 };
 
 const summaryByLocale: Record<PortfolioContent['locale'], string> = {
-  pt: 'Engenheiro de Software Backend com experiência na evolução de sistemas em produção, regras de negócio, integrações e persistência de dados. Atua profissionalmente com Node.js, TypeScript, PHP, SQL Server e cloud; em projetos de engenharia, aplica Fastify, Python, PostgreSQL, Docker, mensageria e processamento de dados na construção de APIs, plataformas SaaS multi-tenant, pipelines analíticos e integrações de IA. Combina modernização de aplicações existentes, arquitetura modular, automação e software orientado a dados.',
-  en: 'Backend Software Engineer experienced in evolving production systems, business rules, integrations, and data persistence. Professional work spans Node.js, TypeScript, PHP, SQL Server, and cloud; engineering projects apply Fastify, Python, PostgreSQL, Docker, messaging, and data processing to APIs, multi-tenant SaaS platforms, analytics pipelines, and AI integrations. Combines legacy application modernization, modular architecture, automation, and data-oriented software.',
+  pt: 'Engenheiro de Software com foco em backend, experiência na evolução e modernização de sistemas em produção, desenvolvimento de APIs e implementação de regras de negócio orientadas a dados. Atua profissionalmente com PHP, SQL Server e arquiteturas legadas, complementando essa experiência com projetos em TypeScript, Node.js, PostgreSQL e Python. Foco em sistemas backend sustentáveis, engenharia de dados, infraestrutura cloud e arquitetura de software aplicada.',
+  en: 'Backend Software Engineer experienced in maintaining and modernizing production systems, building APIs, and implementing database-driven business logic. Professional experience with PHP, SQL Server, and legacy application architectures, complemented by software projects using TypeScript, Node.js, PostgreSQL, and Python. Focused on maintainable backend systems, data engineering, cloud infrastructure, and practical software architecture.',
 };
 
 const roleByLocale: Record<PortfolioContent['locale'], string> = {
@@ -212,14 +212,14 @@ const projectCopyByLocale: Record<
         'React',
       ],
     },
-    'hss-monolith': {
+    chronos: {
       description:
-        'Plataforma SaaS multi-tenant para operações de vendas, estruturada em domínios configuráveis de CRM, workflows, aprovações e notificações.',
+        'SaaS de agendamentos para empresas de serviços, com regras para duração de serviços, disponibilidade de profissionais e reservas sem conflitos.',
       problem:
-        'Isolamento entre tenants, limites de domínio e comunicação assíncrona sem acoplar regras específicas à base do produto.',
+        'Coordenar múltiplos serviços e profissionais, respeitando duração, disponibilidade e janelas de atendimento.',
       solution:
-        'Monólito modular com API e worker Fastify, PostgreSQL, Prisma e RLS, outbox com RabbitMQ e Docker.',
-      technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'Prisma', 'RabbitMQ', 'Docker'],
+        'Fluxo de agendamento com validação de disponibilidade e regras de negócio para reservas de serviços.',
+      technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'Prisma', 'Redis'],
     },
     nexus: {
       description:
@@ -250,14 +250,14 @@ const projectCopyByLocale: Record<
         'React',
       ],
     },
-    'hss-monolith': {
+    chronos: {
       description:
-        'Multi-tenant SaaS platform for sales operations, organized into configurable CRM, workflow, approval, and notification domains.',
+        'Appointment scheduling SaaS for service businesses, with rules for service duration, staff availability, and conflict-free bookings.',
       problem:
-        'Tenant isolation, domain boundaries, and asynchronous communication without coupling industry-specific rules to the product core.',
+        'Coordinate multiple services and staff while respecting service duration, availability, and appointment windows.',
       solution:
-        'Modular monolith with a Fastify API and worker, PostgreSQL, Prisma and RLS, a RabbitMQ outbox, and Docker.',
-      technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'Prisma', 'RabbitMQ', 'Docker'],
+        'Booking flow with availability validation and business rules for service reservations.',
+      technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'Prisma', 'Redis'],
     },
     nexus: {
       description:

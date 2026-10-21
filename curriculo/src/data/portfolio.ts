@@ -19,12 +19,13 @@ const sharedProjects = {
     url: 'https://agah.arq.br/',
     status: 'Entregue',
   },
-  hss: {
-    slug: 'hss-monolith',
-    title: 'Horizon Sales System',
-    eyebrow: 'SaaS multi-tenant · Em desenvolvimento',
-    technologies: ['Fastify', 'TypeScript', 'PostgreSQL', 'Prisma', 'RabbitMQ', 'Docker'],
-    note: 'Produto em desenvolvimento · código privado',
+  chronos: {
+    slug: 'chronos',
+    title: 'Chronos',
+    eyebrow: 'SaaS de agendamentos · Em desenvolvimento',
+    technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'Prisma', 'Redis'],
+    url: 'https://chronos.webhorizon.com.br/',
+    note: 'Produto em desenvolvimento',
     status: 'Em desenvolvimento',
   },
   las: {
@@ -92,17 +93,17 @@ export const pt: PortfolioContent = {
     offlineLabel: 'Case entregue · domínio indisponível',
     items: [
       {
-        ...sharedProjects.hss,
+        ...sharedProjects.chronos,
         description:
-          'O Horizon Sales System é uma plataforma SaaS multi-tenant para operações de vendas, com processos e módulos configuráveis para diferentes segmentos.',
+          'Plataforma SaaS de agendamentos para empresas de serviços, com gestão de horários, profissionais e disponibilidade por serviço.',
         problem:
-          'Centralizar operações comerciais complexas sem transformar regras específicas de cada segmento em acoplamento estrutural.',
+          'Coordenar serviços com durações diferentes, janelas de atendimento e disponibilidade de profissionais sem criar conflitos de agenda.',
         solution:
-          'Domínios modulares para CRM, workflows, aprovações, formulários e notificações, conectados por contratos explícitos.',
+          'Fluxo de agendamento que considera a duração dos serviços e a disponibilidade dos profissionais, com suporte a múltiplos serviços por reserva.',
         architecture:
-          'Monólito modular em monorepo, API e worker Fastify, PostgreSQL com Prisma e RLS, outbox com RabbitMQ e frontend React.',
+          'Produto SaaS em desenvolvimento, com foco em regras de agendamento, persistência de dados e evolução modular.',
         outcome:
-          'Uma base arquitetural preparada para evolução incremental, isolamento multi-tenant e integrações assíncronas observáveis.',
+          'Uma base para organizar agendamentos e operações de atendimento em diferentes tipos de negócio.',
       },
       {
         ...sharedProjects.las,
@@ -164,14 +165,14 @@ export const pt: PortfolioContent = {
     items: [
       {
         company: 'Web Horizon',
-        role: 'Tecnologia e desenvolvimento de produtos',
+        role: 'Engenheiro de Software',
         period: '2025 — agora',
         description:
-          'Atuação na construção de experiências e soluções digitais para empresas, conectando estratégia, produto e engenharia.',
+          'Projeto e desenvolvo produtos digitais e soluções empresariais, transformando requisitos em arquitetura e implementação de software.',
         highlights: [
-          'Estruturação de soluções digitais orientadas aos objetivos do negócio.',
-          'Desenvolvimento de produtos web do conceito à publicação.',
-          'Decisões de arquitetura, integração e experiência do usuário.',
+          'Desenvolvimento de aplicações web e integrações backend com TypeScript, Node.js, React e serviços cloud.',
+          'Decisões técnicas sobre APIs, persistência de dados, estrutura das aplicações e implantação.',
+          'Criação de soluções de software com foco em modularidade, manutenção e requisitos de negócio.',
         ],
         technologies: ['TypeScript', 'React', 'Node.js', 'Cloud'],
       },
@@ -180,11 +181,11 @@ export const pt: PortfolioContent = {
         role: 'Desenvolvimento de software',
         period: 'Desde abril de 2023',
         description:
-          'Desenvolvimento e manutenção de um sistema de gestão em produção, atuando entre regras de negócio, banco de dados e interface.',
+          'Mantenho e evoluo um sistema de gestão em produção baseado em uma arquitetura MVC legada em PHP, implementando regras de negócio e funcionalidades integradas ao banco de dados.',
         highlights: [
-          'Manutenção e evolução de funcionalidades em um sistema existente.',
-          'Integração entre backend, SQL Server e experiências web.',
-          'Colaboração com controle de versão e entrega incremental.',
+          'Desenvolvimento de funcionalidades backend e lógica de acesso a dados com PHP e SQL Server para módulos empresariais.',
+          'Contribuição para a modernização do legado e a evolução da arquitetura de persistência.',
+          'Refatorações incrementais e validações técnicas, preservando os fluxos e o comportamento do sistema.',
         ],
         technologies: ['PHP', 'SQL Server', 'JavaScript', 'HTML', 'CSS'],
       },
@@ -259,9 +260,9 @@ export const pt: PortfolioContent = {
       {
         title: 'MBA em Data Science e Analytics',
         institution: 'ESALQ · Universidade de São Paulo',
-        period: 'MBA',
+        period: 'Em andamento',
         description:
-          'Pós-graduação voltada à aplicação de dados, analytics e tomada de decisão em contextos de negócio.',
+          'Pós-graduação em andamento voltada à aplicação de ciência de dados, analytics e tomada de decisão em contextos de negócio.',
         category: 'degree',
       },
       {
@@ -358,20 +359,20 @@ export const en: PortfolioContent = {
     offlineLabel: 'Delivered case · domain unavailable',
     items: [
       {
-        ...sharedProjects.hss,
-        eyebrow: 'Multi-tenant SaaS · In development',
-        note: 'Product in development · private codebase',
+        ...sharedProjects.chronos,
+        eyebrow: 'Appointment scheduling SaaS · In development',
+        note: 'Product in development',
         status: 'In development',
         description:
-          'Horizon Sales System is a multi-tenant SaaS platform for sales operations, with configurable processes and modules for different industries.',
+          'Appointment scheduling SaaS for service businesses, with scheduling management, staff assignment, and service-specific availability.',
         problem:
-          'Centralize complex commercial operations without turning industry-specific rules into structural coupling.',
+          'Coordinate services with different durations, appointment windows, and staff availability without creating scheduling conflicts.',
         solution:
-          'Modular domains for CRM, workflows, approvals, forms, and notifications connected through explicit contracts.',
+          'A booking flow that accounts for service duration and staff availability, including multiple services within a single booking.',
         architecture:
-          'Modular monolith in a monorepo, Fastify API and worker, PostgreSQL with Prisma and RLS, RabbitMQ outbox, and React frontend.',
+          'SaaS product in development, focused on scheduling rules, data persistence, and modular evolution.',
         outcome:
-          'An architectural foundation built for incremental evolution, tenant isolation, and observable asynchronous integrations.',
+          'A foundation for organizing appointments and service operations across different business types.',
       },
       {
         ...sharedProjects.las,
@@ -537,9 +538,9 @@ export const en: PortfolioContent = {
       {
         title: 'MBA in Data Science and Analytics',
         institution: 'ESALQ · University of São Paulo',
-        period: 'MBA',
+        period: 'In progress',
         description:
-          'Graduate program focused on applying data, analytics, and decision-making in business contexts.',
+          'Ongoing graduate program focused on applying data science, analytics, and decision-making in business contexts.',
         category: 'degree',
       },
       {
