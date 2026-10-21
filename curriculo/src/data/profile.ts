@@ -3,7 +3,7 @@ import type { ProfessionalProfile } from '../types/profile';
 export const profile: ProfessionalProfile = {
   fullName: 'Victor Alonso Heringer',
   displayName: 'Victor Heringer',
-  role: 'Backend Developer',
+  role: 'Backend Software Engineer',
   email: 'victor.heringer@webhorizon.com.br',
   location: {
     city: 'Vitória',
