@@ -44,13 +44,13 @@ const labelsByLocale: Record<PortfolioContent['locale'], ResumeLabels> = {
 };
 
 const summaryByLocale: Record<PortfolioContent['locale'], string> = {
-  pt: 'Engenheiro de Software com foco em backend, experiência na evolução e modernização de sistemas em produção, desenvolvimento de APIs e implementação de regras de negócio orientadas a dados. Atua profissionalmente com PHP, SQL Server e arquiteturas legadas, complementando essa experiência com projetos em TypeScript, Node.js, PostgreSQL e Python. Foco em sistemas backend sustentáveis, engenharia de dados, infraestrutura cloud e arquitetura de software aplicada.',
-  en: 'Backend Software Engineer experienced in maintaining and modernizing production systems, building APIs, and implementing database-driven business logic. Professional experience with PHP, SQL Server, and legacy application architectures, complemented by software projects using TypeScript, Node.js, PostgreSQL, and Python. Focused on maintainable backend systems, data engineering, cloud infrastructure, and practical software architecture.',
+  pt: 'Desenvolvedor Full Stack com experiência na evolução de sistemas em produção, desenvolvimento de interfaces web, APIs, integrações e regras de negócio orientadas a dados. Atua profissionalmente com PHP e SQL Server, incluindo modernização de aplicações legadas, e desenvolve projetos com TypeScript, Node.js, React, PostgreSQL e Python. Foco em entregar soluções ponta a ponta, de interfaces e serviços à persistência de dados e infraestrutura cloud.',
+  en: 'Full Stack Software Engineer experienced in evolving production systems, building web interfaces, APIs, integrations, and data-driven business logic. Professional experience with PHP and SQL Server, including legacy application modernization, complemented by projects using TypeScript, Node.js, React, PostgreSQL, and Python. Focused on end-to-end delivery across user interfaces, services, data persistence, and cloud infrastructure.',
 };
 
 const roleByLocale: Record<PortfolioContent['locale'], string> = {
-  pt: 'Engenheiro de Software Backend | Dados, APIs & Cloud',
-  en: 'Backend Software Engineer | Data & Cloud',
+  pt: 'Desenvolvedor Full Stack | Web, APIs & Cloud',
+  en: 'Full Stack Software Engineer | Web, APIs & Cloud',
 };
 
 const skillsByLocale: Record<PortfolioContent['locale'], SkillGroup[]> = {

@@ -67,7 +67,7 @@ export const pt: PortfolioContent = {
     title: 'Construo sistemas que',
     accent: 'continuam simples ao crescer.',
     description:
-      'Desenvolvedor focado em backend, APIs e integrações. Transformo necessidades de produto em software confiável, organizado e pronto para evoluir.',
+      'Desenvolvedor full stack que conecta interfaces, APIs, bancos de dados e infraestrutura para transformar necessidades de negócio em produtos digitais confiáveis e fáceis de evoluir.',
     location: 'Vitória · ES · Brasil',
     availability: 'Disponível para oportunidades remotas e internacionais',
     primaryCta: 'Conhecer meu trabalho',
@@ -77,7 +77,7 @@ export const pt: PortfolioContent = {
     eyebrow: 'Perfil',
     title: 'Produto na superfície. Engenharia por baixo.',
     description:
-      'Minha experiência combina desenvolvimento de produto, manutenção de sistemas reais e construção de soluções ponta a ponta. Trabalho entre regras de negócio, APIs, dados, infraestrutura e interfaces — com atenção especial à clareza da arquitetura.',
+      'Minha experiência combina desenvolvimento de interfaces web, APIs, integração com bancos de dados, infraestrutura e manutenção de sistemas em produção. Trabalho de ponta a ponta, da experiência do usuário às regras de negócio e à persistência, priorizando soluções claras e sustentáveis.',
     metrics: [
       { value: '2023', label: 'Início da experiência profissional' },
       { value: '5', label: 'Produtos digitais em destaque' },
@@ -333,7 +333,7 @@ export const en: PortfolioContent = {
     title: 'I build systems that',
     accent: 'stay simple as they grow.',
     description:
-      'Backend developer focused on APIs and integrations. I turn product needs into reliable, organized software built to evolve.',
+      'Full stack developer connecting user interfaces, APIs, databases, and infrastructure to turn business needs into reliable digital products built to evolve.',
     location: 'Vitória · ES · Brazil',
     availability: 'Open to remote and international opportunities',
     primaryCta: 'Explore my work',
@@ -343,7 +343,7 @@ export const en: PortfolioContent = {
     eyebrow: 'Profile',
     title: 'Product on the surface. Engineering underneath.',
     description:
-      'My experience brings together product development, production-system maintenance, and end-to-end delivery. I work across business rules, APIs, data, infrastructure, and interfaces—with a strong focus on architectural clarity.',
+      'My experience spans web interfaces, APIs, database integration, infrastructure, and production-system maintenance. I work end to end—from user experience to business rules and persistence—prioritizing clear, maintainable solutions.',
     metrics: [
       { value: '2023', label: 'Professional journey started' },
       { value: '5', label: 'Featured digital products' },
