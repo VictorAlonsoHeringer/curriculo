@@ -443,14 +443,14 @@ export const en: PortfolioContent = {
     items: [
       {
         company: 'Web Horizon',
-        role: 'Technology and product development',
+        role: 'Software Engineer',
         period: '2025 — present',
         description:
-          'Building digital experiences and solutions for businesses by connecting strategy, product, and engineering.',
+          'Designing and developing digital products and business software, translating requirements into maintainable architecture and implementation.',
         highlights: [
-          'Shaping digital solutions around concrete business goals.',
-          'Developing web products from concept through release.',
-          'Making architecture, integration, and user-experience decisions.',
+          'Building web applications and backend integrations with TypeScript, Node.js, React, and cloud services.',
+          'Making technical decisions across APIs, data persistence, application structure, and deployment.',
+          'Delivering software solutions focused on modularity, maintainability, and business requirements.',
         ],
         technologies: ['TypeScript', 'React', 'Node.js', 'Cloud'],
       },
@@ -459,11 +459,11 @@ export const en: PortfolioContent = {
         role: 'Software development',
         period: 'Since April 2023',
         description:
-          'Developing and maintaining a production management system across business rules, databases, and interface.',
+          'Maintaining and evolving a production management system built on a legacy PHP MVC architecture, implementing business rules and database-integrated features.',
         highlights: [
-          'Maintaining and evolving features in an established system.',
-          'Integrating backend services, SQL Server, and web experiences.',
-          'Collaborating through version control and incremental delivery.',
+          'Developing backend features and data-access logic with PHP and SQL Server for business modules.',
+          'Contributing to legacy-system modernization and persistence-layer improvements.',
+          'Refactoring incrementally and validating changes while preserving existing system workflows and behavior.',
         ],
         technologies: ['PHP', 'SQL Server', 'JavaScript', 'HTML', 'CSS'],
       },
