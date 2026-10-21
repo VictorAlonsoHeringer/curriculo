@@ -165,11 +165,11 @@ const experienceByLocale: Record<PortfolioContent['locale'], Experience[]> = {
       role: 'Software and product development',
       period: '2025 — Present',
       description:
-        'Developing web products and business solutions across architecture, integrations, and cloud delivery.',
+        'Designing and developing digital products and business software, translating requirements into maintainable architecture and implementation.',
       highlights: [
-        'Structure technical solutions around business goals, defining architecture and integrations.',
-        'Develop and deploy web products with TypeScript, Node.js, and React.',
-        'Drive technical decisions from concept to deployment across services, interfaces, and cloud infrastructure.',
+        'Building web applications and backend integrations with TypeScript, Node.js, React, and cloud services.',
+        'Making technical decisions across APIs, data persistence, application structure, and deployment.',
+        'Delivering software solutions focused on modularity, maintainability, and business requirements.',
       ],
       technologies: ['Node.js', 'TypeScript', 'Cloud', 'React'],
     },
@@ -178,11 +178,11 @@ const experienceByLocale: Record<PortfolioContent['locale'], Experience[]> = {
       role: 'Full Stack Software Developer',
       period: 'Apr 2023 — Present',
       description:
-        'Developing and maintaining a production management system focused on business rules, backend services, and data persistence.',
+        'Maintaining and evolving a production management system built on a legacy PHP MVC architecture, implementing business rules and database-integrated features.',
       highlights: [
-        'Develop and maintain system modules integrating business rules, a PHP backend, and SQL Server.',
-        'Evolve features in an established codebase through incremental delivery and version control.',
-        'Integrate data persistence and web interfaces to support the system’s operational workflows.',
+        'Developing backend features and data-access logic with PHP and SQL Server for business modules.',
+        'Contributing to legacy-system modernization and persistence-layer improvements.',
+        'Refactoring incrementally and validating changes while preserving existing workflows and behavior.',
       ],
       technologies: ['PHP', 'SQL', 'SQL Server', 'JavaScript', 'HTML', 'CSS'],
     },
