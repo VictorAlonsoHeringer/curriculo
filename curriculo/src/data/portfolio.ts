@@ -25,6 +25,7 @@ const sharedProjects = {
     eyebrow: 'SaaS de agendamentos · Em desenvolvimento',
     technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'Prisma', 'Redis'],
     url: 'https://chronos.webhorizon.com.br/',
+    image: 'projects/chronos-project.jpg',
     note: 'Produto em desenvolvimento',
     status: 'Em desenvolvimento',
   },
